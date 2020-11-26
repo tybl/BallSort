@@ -13,7 +13,7 @@ struct INode {
   virtual void print() const = 0;
   virtual void print_steps() const = 0;
   virtual size_t priority() const = 0;
-  virtual size_t num_steps() const = 0;
+  virtual size_t distance() const = 0;
 }; // struct INode
 
 #endif // INODE_HPP

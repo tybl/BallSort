@@ -9,13 +9,19 @@
 #include <string>
 #include <vector>
 
+struct Board;
+
+struct SharedStats {
+  std::set<Board> m_boards;
+  size_t m_max_stack_height;
+}; // struct SharedStats
+
 struct Board
   : public INode
 {
   std::vector<std::string> m_contents;
   size_t m_priority;
-  std::shared_ptr<std::set<Board>> m_set;
-  uint8_t m_max_stack_height;
+  std::shared_ptr<SharedStats> m_stats;
   mutable Board const* m_parent;
   mutable size_t m_distance;
 public:
@@ -38,7 +44,7 @@ public:
 
   size_t priority() const override;
 
-  size_t num_steps() const override;
+  size_t distance() const override;
 
   bool operator<(Board const& o) const;
 

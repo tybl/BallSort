@@ -23,7 +23,6 @@ INode const* Executor::solve() {
     for (auto edge : edges) {
       auto* n = *node + edge;
       if (n) {
-        assert(0 < n->priority());
         m_nodes.push_back(n);
       }
     }
