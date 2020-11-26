@@ -6,16 +6,18 @@
 
 #include <memory>
 #include <set>
+#include <string>
 #include <vector>
 
 struct Board
   : public INode
 {
-  std::vector<std::vector<char>> m_contents;
-  mutable Board const* m_parent;
+  std::vector<std::string> m_contents;
+  size_t m_priority;
   std::shared_ptr<std::set<Board>> m_set;
-  mutable size_t m_distance;
   uint8_t m_max_stack_height;
+  mutable Board const* m_parent;
+  mutable size_t m_distance;
 public:
 
   Board(std::istream& input);
@@ -34,16 +36,20 @@ public:
 
   void print_steps() const override;
 
-  double priority() const override;
+  size_t priority() const override;
+
+  size_t num_steps() const override;
 
   bool operator<(Board const& o) const;
 
 private:
 
   void apply(Edge const& e);
-  bool is_full(std::vector<char> const& s) const;
-  bool is_full_and_homogeneous(std::vector<char> const& s) const;
-  bool is_homogeneous(std::vector<char> const& s) const;
+  size_t count_suffix_matching(std::string const& s, char c) const;
+  size_t calc_priority() const;
+  bool is_full(std::string const& s) const;
+  bool is_full_and_homogeneous(std::string const& s) const;
+  bool is_homogeneous(std::string const& s) const;
   bool is_valid(Edge const& e) const;
 
 };

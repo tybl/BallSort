@@ -10,7 +10,7 @@
 #include <vector>
 
 struct Executor {
-  std::priority_queue<INode const*, std::vector<INode const*>, NodeWeight> m_nodes;
+  std::vector<INode const*> m_nodes;
   std::unique_ptr<const INode> m_root;
 public:
 
